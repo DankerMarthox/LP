@@ -1,0 +1,40 @@
+PROCEDURE F
+INITIALIZE //dab
+SET dab TO 10
+SET dab TO SUBTRACT SUM 10 TO 5 TO dab
+IF GREATER dab THAN ELSE THEN
+  IF IF GREATER dab THAN  THEN
+    IF GREATER dab THAN 5 THEN
+    ELSE
+    END IF
+      IF GREATER dab THAN 5 THEN
+        IF GREATER dab THAN 5 THEN
+        IF GREATER dab5 THAN 5 THEN
+            True
+            False
+            1582
+            15.545
+            5 a a a
+            Megadab DIFFERENT TO 45
+            WHILE NO 1 EQUAL TO dab
+            GREATER 3 THAN 2
+            3 AND 5 OR 6
+          END IF
+          NO dab
+          dab EQUAL TO 5
+          READ XD
+        END IF
+        ELSE
+          PRINT XD
+          SUBTRACT 1 TO dab
+          END WHILE
+          PRINT "AYUDA"
+      ELSE
+        MULTIPLY 45 BY 789
+    ELSE
+      PRINT MULTIPLY 5 BY MULTIPLY 45 BY 789
+    END IF
+    SUM 10 TO SUM 10 TO SUM 10 TO SUM 10 TO 5
+    DIVIDE 1 BY DIVIDE 45 BY 789
+  END IF
+END PROCEDURE

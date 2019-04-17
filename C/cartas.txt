@@ -1,0 +1,27 @@
+13
+1
+Gabo 9 0 G
+2
+81 JorgeAC
+3
+A1 Axl 0
+3
+A0 Joako 0
+2
+31 ChaloCB
+2
+70 RorroAC
+1
+Pepe 3 0 F
+4
+1 4 5 1 1 1 1 1 Violet
+4
+0 2 3 1 2 3 Rin
+4
+1 6 4 4 3 2 1 Seba
+4
+0 6 1 42 Cami
+4
+0 2 3 1 1 1 Ayuda
+4
+1 1 2 1 2 Tu
