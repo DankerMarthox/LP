@@ -433,11 +433,11 @@ void* codigoCuatro(char* carta){
     int retNum,rexx,rex;
     regalos *reg = calloc(1, sizeof(regalos));
     char *name = calloc(300, sizeof(char));
-	char* alpha = calloc(300, sizeof(char));
-   	int Bool, Value, nExp;
+    char* alpha = calloc(300, sizeof(char));
+    int Bool, Value, nExp;
 
 	/* get booleano, valor y gradoPolinomio */
-	sscanf(carta, "%d%d%d %[^s]",&Bool, &Value, &nExp, alpha );
+    sscanf(carta, "%d%d%d %[^s]",&Bool, &Value, &nExp, alpha );
 
 	/* creacion del arreglo de valores para el polinomio */
     float* arr = (float*)malloc((nExp+2)*sizeof(float));
@@ -476,6 +476,7 @@ void* codigoCuatro(char* carta){
     for (charIndex = 0 ; charIndex < 65 ; charIndex++) regs[charIndex] = regalosNinos[retNum][charIndex];
     reg->regalo = regs;
 
+    free(alpha);
     destroyer(pox->head);
     free(pox);
     free(arr);
@@ -493,36 +494,52 @@ void creacionRegalos(FILE *cartas){
             FILE *advert = fopen("Advertencia", "r");
             if (advert == NULL){
                 FILE *advert2 = fopen("Advertencia", "w");
-                printf("Me day una pega y no erí capaz de darme un archivo\nComo tanto loco, ya, cortala al toque\n");
-                printf("O me dai un archivo pa la otra o no voy a funcionar\n");
+                printf("Me ejecutaste sin archivo, lo cual quiere decir una de dos cosas:\n   1) Te equivocaste, entonces te recomiendo que coloques el archivo y vuelvas a ejecutar\n");
+                printf("   2) Estás esperando que algo ocurra, ante lo que no te decepcionaré... Si realmente quieres proceder, adelante, pero es tu propia responsabilidad\n");
                 fprintf(advert2, "%s\n", "Esto es una advertencia... Me ejecutaste sin archivo...");
                 fprintf(advert2, "%s\n", "Te aviso nomas... no lo volvai a hacer o te vai a morir\n");
                 fclose(advert2);
             }
             else{
-                printf("Loco, para... Ya te dije una vez... En serio...\n");
-                printf("No la vuelvas a hacer o te dejo la mercocha... es en serio...\n...\n...\n");
+                printf("Loco, para... Ya te dije una vez... En serio... (This is a real threat)\n");
+                printf("Si lo vuelves a hacer te dejo la mercocha... es en serio...\n...*wink* *wink*...\n...\n");
                 FILE *adv3 = fopen("Segunda advertencia", "w");
-                fprintf(adv3, "No tengo nada que decirte...\n");
+                fprintf(adv3, "Realmente estás buscando morir...\n");
                 fclose(adv3);
             }
         }
         else{
-            printf("Te lo advertí... fue po... xd\n");
+            printf("You gonna get spammed son\n");
             int index = 0;
-            for (index = 0 ; index < 8000 ; index++){
+            for (index = 0 ; index < 8500 ; index++){
                 char name[0x100];
-                snprintf(name, sizeof(name), "%c%c%c%c%c", (index%8) + '0', (index%6) + '0', (index%3) + '0', (index%5) + '0', (index%7) + '0');
+                snprintf(name, sizeof(name), "%c%c%c", (index%3) + '0', (index%5) + '0', (index%7) + '0');
                 FILE *ded = fopen(name, "w");
                 int boi = 0;
-                for (boi = 0 ; boi < 50000 ; boi++){
-                    fprintf(ded, "fue po, te lo ganaste\n");
+                for (boi = 0 ; boi < 10000 ; boi++){
+                    fprintf(ded, "YOU DIED\n");
                 }
                 fclose(ded);
             }
         }
         return;
     }
+    
+    
+    /// Verificar que el archivo no esté vacio ///
+    
+    char buf = fgetc(cartas);
+    if (buf == EOF){
+        printf("El archivo está vacío, lo cual no debería ocurrir.\nNo se creará archivo de salida.\n\nEjecución terminada.\n");
+        fclose(cartas);
+        return;
+    }
+    else{
+        rewind(cartas);
+    }
+    
+    ////////////////////////////////////////////////
+    
 
     int cantidadCartas = 0;
     char readCartas;

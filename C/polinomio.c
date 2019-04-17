@@ -110,5 +110,5 @@ void destroyer(listPol* head){
         free(head);
         head = nxt;
     }
-    //free(head);
+    free(head);
 }
