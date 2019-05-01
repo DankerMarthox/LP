@@ -64,24 +64,20 @@ void imprimirSolucion(polinomio* Lista) {
 void derivar(polinomio* poli){
     moveToStart(poli);
     while(poli->curr != poli->tail){
-        ((polinomio*)poli)->curr->val = (((polinomio*)poli)->curr->val)*(((polinomio*)poli)->curr->exp);
-        ((polinomio*)poli)->curr->exp -= 1;
+        poli->curr->val = (poli->curr->val)*(poli->curr->exp);
+        poli->curr->exp -= 1;
         next(poli);
     }
-    ((polinomio*)poli)->tail->val = (((polinomio*)poli)->tail->val)*(((polinomio*)poli)->tail->exp);
-    ((polinomio*)poli)->tail->exp -= 1;
 
 }
 
 void integrar(polinomio* poli){
     moveToStart(poli);
     while(poli->curr != poli->tail){
-        ((polinomio*)poli)->curr->exp += 1;
-        ((polinomio*)poli)->curr->val = (((polinomio*)poli)->curr->val)/(((polinomio*)poli)->curr->exp);
+        poli->curr->exp += 1;
+        poli->curr->val = poli->curr->val / poli->curr->exp;
         next(poli);
     }
-    ((polinomio*)poli)->tail->exp += 1;
-    ((polinomio*)poli)->tail->val = (((polinomio*)poli)->tail->val)/(((polinomio*)poli)->tail->exp);
 }
 
 //useless function
@@ -98,6 +94,10 @@ int evalpol(polinomio* poli, int n){
       ret += myPow(n,poli->curr->exp) * poli->curr->val;
       next(poli);
     }
+    if (ret < 0) {
+        ret = -1*ret;
+    }
+    printf("%f\n",ret );
     return (int)ret;
 }
 

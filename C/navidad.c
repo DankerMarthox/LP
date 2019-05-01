@@ -432,8 +432,8 @@ void* codigoCuatro(char* carta){
 
     int retNum,rexx,rex;
     regalos *reg = calloc(1, sizeof(regalos));
-    char *name = calloc(300, sizeof(char));
-    char* alpha = calloc(300, sizeof(char));
+    char *name = calloc(600, sizeof(char));
+    char* alpha = calloc(600, sizeof(char));
     int Bool, Value, nExp;
 
 	/* get booleano, valor y gradoPolinomio */
@@ -446,13 +446,14 @@ void* codigoCuatro(char* carta){
     int index = 0;
     int readCount = 0;
     int now = 0;
+	printf("%d\n",nExp );
 
 
-    while((readCount < nExp) && (now = sscanf(alpha + i,"%f%n", &arr[index], &readCount)) > 0){
+    while((readCount < nExp+1) && (now = sscanf(alpha + i,"%f%n", &arr[index], &readCount)) > 0){
         index += now;
         i+= readCount;
     }
-    i++;
+
 
     /* get nombre del nino */
     sscanf(alpha+i, "%s", name);
@@ -471,7 +472,7 @@ void* codigoCuatro(char* carta){
 
     /* asignaciones de valores correspondientes a struct regalos */
     reg->nombre = name;
-    char *regs = calloc(80, sizeof(char));
+    char *regs = calloc(500, sizeof(char));
     int charIndex;
     for (charIndex = 0 ; charIndex < 65 ; charIndex++) regs[charIndex] = regalosNinos[retNum][charIndex];
     reg->regalo = regs;
@@ -524,10 +525,10 @@ void creacionRegalos(FILE *cartas){
         }
         return;
     }
-    
-    
+
+
     /// Verificar que el archivo no esté vacio ///
-    
+
     char buf = fgetc(cartas);
     if (buf == EOF){
         printf("El archivo está vacío, lo cual no debería ocurrir.\nNo se creará archivo de salida.\n\nEjecución terminada.\n");
@@ -537,9 +538,9 @@ void creacionRegalos(FILE *cartas){
     else{
         rewind(cartas);
     }
-    
+
     ////////////////////////////////////////////////
-    
+
 
     int cantidadCartas = 0;
     char readCartas;
