@@ -87,7 +87,7 @@ public class Juego {
 		String Name="";
 		String iName="";
 		String c ="";
-		String r="";
+		String r ="";
 
 		String[] classes = {"Berserker","Cleric","Mage","Rogue"};
 		String[] race = {"Human","Orc","Elf","Dwarf"};
