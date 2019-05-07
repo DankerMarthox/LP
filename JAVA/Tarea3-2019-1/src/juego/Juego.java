@@ -30,13 +30,14 @@ public class Juego {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    //TODO agregar mas frases
     public static String nameLine(String enemyName) {
         int num = ThreadLocalRandom.current().nextInt(0,3);
         String Line = "";
         switch (num) {
 
         case 0:
-            Line = "MY NAME IS " + enemyName + " THE FOOLISH, I CHALLENGE TO A DUEL FOR NO REASON WHATSOEVER";
+            Line = "MY NAME IS " + enemyName + " THE FOOLISH, I CHALLENGE THOU TO A DUEL FOR NO REASON WHATSOEVER";
             break;
         case 1:
             Line = "Technology is incredible! You can now store and recall items and Pokemon as data via PC!, Also my name is "
@@ -305,11 +306,9 @@ public class Juego {
             case "Prolonia":
                 Kage.asignarNombre("Prokage Porlosbor Des");
                 /// INICIAR COMBATE
-        }        
-        
-    }
-   
-    
+        }           
+    }    
+
     public ArrayList<Enemigo> createEnemies(int level, Boolean flag){
 
         String[] enemies = { "Klrak", "Adran", "Isaac", "Elysium", "Krrogh", "Jenkins","Potato","Muramasacchan", "IanPom","ElPEPEENOJON" };
@@ -536,6 +535,7 @@ public class Juego {
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0, election));
                     }
                     player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0, 0));
+                    player.asignarVida(player.getVida() - enemies.get(1).realizarAtaque(0, 0));
                 }
                 if (enemies.get(0).getVida() < 1 && enemies.get(1).getVida() < 1) {
                     won = true;
@@ -582,14 +582,15 @@ public class Juego {
             System.out.println("Te has ganado " + gorudo + " de oro.\n\n[MISSION COMPLETE]\n");
             System.out.println("Máquina... Troesma... Campeón... Dios... Genio... (LOL)\nTe regeneraré tu vida. ;)");
             System.out.println("[HEALING]");
-            System.out.println("\n\t"+player.getNombre()+".asignarvida(" + life + ").\n");
+            System.out.println("\n\t"+player.getNombre()+".asignarvida(" + player.getMaxVida() + ").\n");
             player.asignarOro(player.getOro() + gorudo);
+            player.asignarVida(player.getMaxVida());
 
         }else if (!second && !won){
             System.out.println("\n\t"+player.getNombre()+": I need healing...");
             System.out.println("[YOU LOSE]\nPerdedor... manqueque te apuesto a que eres ifnin.\nTe regeneraré tu vida, pero que no se vuelva a repetir ah?...");
             System.out.println("[HEALING]");
-            player.asignarVida(life);
+            player.asignarVida(player.getMaxVida());
             System.out.println("\n\t" + player.getNombre() + ".asignarvida(" + life + ").\n");
         }
     }
