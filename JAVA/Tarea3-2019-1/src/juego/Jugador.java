@@ -218,5 +218,9 @@ public class Jugador implements Personaje{
         System.out.println("\n[0] "+this.ninja.Jutsu_1+"\n[1] " + this.ninja.Jutsu_2 +
         "\n[2] " + this.ninja.Jutsu_3);
     }
+
+    public int getLevelJutsts(){
+        return this.ninja.getLevelJutsts();
+    }
     
 }

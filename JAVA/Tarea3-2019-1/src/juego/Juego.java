@@ -404,7 +404,7 @@ public class Juego {
         System.out.println("\n\tHP: " + player.getVida());
         System.out.println("\tLvl: " + player.getNivel());
         System.out.println("\tArma: " + player.getArma());
-        System.out.println("\tJutsus: Lvl. " + player.)
+        System.out.println("\tJutsus: Lvl. " + player.getLevelJutsts());
         System.out.println("\tRango: " + player.getRango());
     }
 
@@ -415,13 +415,14 @@ public class Juego {
         System.out.println("\tRango: " + e.getRango());
     }
 
-    public void Battle(ArrayList<Enemigo> enemies, Jugador player, int level){
+    public void Battle(ArrayList<Enemigo> enemies, Jugador player, int level, Boolean second){
         int Total = enemies.size();
         Boolean won = false;
         int gorudo = 0;
         int life = player.getVida();
         int election;
         Boolean one = false;
+        int rival = 0;
         switch(Total){
             case 0:
                 one = true;
@@ -466,15 +467,89 @@ public class Juego {
                 }
                 break;
             case 2:
-                break;
+            //hacer String battleDialogues2()
+            // este par de weones te desafian a una batalla de mitos y leyendas o una
+            // batalla de gallos
+            // a quien atacas primero?
+
+            while(player.getVida() > 0){
+                if(won){
+                    break;
+                }
+                if(enemies.size()>1){
+                    System.out.println("[ON BATTLE]"); // esta este weon
+                    DisplayBattleEnemy(enemies.get(0)); //y este otro weon
+                    DisplayBattleEnemy(enemies.get(1));
+                    System.out.println();
+                    DisplayBattlePlayer(player);// y vo gil culiao
+
+                    //a quien atacai enfermo ql
+                    rival = eleccion();
+                    while ((rival > 1) || (rival < 0)) {
+                        System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
+                        rival = eleccion();
+                    }
+                    //como lo atacai aweonao
+                    election = eleccion();
+                    while ((election > 1) || (election < 0)) {
+                        System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
+                        election = eleccion();
+                    }
+                    if (election == 1) {
+                        System.out.print("\nChoose your dark magik: ");
+                        player.displayJutsus();
+                        election = eleccion();
+                        while ((election > 2) || (election < 0)) {
+                            System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
+                            election = eleccion();
+                        }
+                        enemies.get(rival).asignarVida(enemies.get(rival).getVida() - player.realizarAtaque(1, election));
+                    } else {
+                        enemies.get(rival).asignarVida(enemies.get(rival).getVida() - player.realizarAtaque(0, election));
+                    }
+                    player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0, 0));
+
+                }else{
+                    //parte con unn solo weon
+                    System.out.println("[ON BATTLE]");
+                    DisplayBattleEnemy(enemies.get(0));
+                    System.out.println();
+                    DisplayBattlePlayer(player);
+
+                    System.out.println("\nQue harás???... O.o");
+                    System.out.println("[0] Su phisical_CCC?... \n[1] Star burst stream... ");
+                    election = eleccion();
+                    while ((election > 1) || (election < 0)) {
+                        System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
+                        election = eleccion();
+                    }
+                    if (election == 1) {
+                        System.out.print("\nChoose your dark magik: ");
+                        player.displayJutsus();
+                        election = eleccion();
+                        while ((election > 2) || (election < 0)) {
+                            System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
+                            election = eleccion();
+                        }
+                        enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(1, election));
+                    } else {
+                        enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0, election));
+                    }
+                    player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0, 0));
+                }
+                if (enemies.get(0).getVida() < 1 && enemies.get(1).getVida() < 1) {
+                    won = true;
+                }
+            }
+            break;
         }
-        if (one){
+        if (!second && one){
             player.asignarExperiencia(10);
             System.out.println("Has ganado " + 10 + " exp.");
             gorudo = ThreadLocalRandom.current().nextInt(5, 11);
             player.asignarOro(player.getOro() + gorudo);
             System.out.println("Te has ganado " + gorudo + " de oro.\n\n[MISSION COMPLETE]\n");
-        }else if (won) {
+        }else if (!second && won) {
             System.out.println(
                     "Estuvo buena la pelea, + 10 y a favoritos. " + player.getNombre() + "\nCompetaste la mision!");
             switch (level) {
@@ -506,15 +581,17 @@ public class Juego {
             }
             System.out.println("Te has ganado " + gorudo + " de oro.\n\n[MISSION COMPLETE]\n");
             System.out.println("Máquina... Troesma... Campeón... Dios... Genio... (LOL)\nTe regeneraré tu vida. ;)");
-
+            System.out.println("[HEALING]");
+            System.out.println("\n\t"+player.getNombre()+".asignarvida(" + life + ").\n");
             player.asignarOro(player.getOro() + gorudo);
-        } else {
+
+        }else if (!second && !won){
             System.out.println("\n\t"+player.getNombre()+": I need healing...");
             System.out.println("[YOU LOSE]\nPerdedor... manqueque te apuesto a que eres ifnin.\nTe regeneraré tu vida, pero que no se vuelva a repetir ah?...");
+            System.out.println("[HEALING]");
+            player.asignarVida(life);
+            System.out.println("\n\t" + player.getNombre() + ".asignarvida(" + life + ").\n");
         }
-        player.asignarVida(life);
-        System.out.println("[HEALING]");
-        System.out.println("\n\t"+player.getNombre()+".asignarvida(" + life + ").\n");
     }
 
     public void realizarMision(Jugador player){
@@ -546,7 +623,7 @@ public class Juego {
             case 0:
                 System.out.println("\n\t[0] Encontrar al gato de la señora Puff.\n\t[1] Entrega del Little Caesar's.");
                 Enemies = createEnemies(1,false);
-                Battle(Enemies, player, 1);
+                Battle(Enemies, player, 1,false);
                 break;
             case 1:
                 System.out.println("\n\t[0] Obtener un 5* en FGO [MEGADIFICIL].\n\t[1] Entregar mi tarea de JAVA.");
@@ -555,7 +632,7 @@ public class Juego {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
                 }
-                Battle(Enemies, player, 4);
+                Battle(Enemies, player, 4, false);
                 break;
             case 2:
                 //flag
@@ -566,6 +643,8 @@ public class Juego {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
                 }
+                Battle(Enemies, player, 6, false);
+                Battle(Enemies2, player, 6, false);
                 break;
             case 3:
                 Enemies = createEnemies(8, false);
@@ -575,6 +654,9 @@ public class Juego {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
                 }
+                Battle(Enemies, player, 8, false);
+                Battle(Enemies2, player, 8, false);
+
                 break;
             case 4:
                 Enemies = createEnemies(10, false);
@@ -585,7 +667,10 @@ public class Juego {
                 if(player.getNivel() < 10) { 
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala"); 
-                } 
+                }
+                Battle(Enemies, player, 10, false);
+                Battle(Enemies2, player, 10, false);
+                Battle(Enemies3, player, 10, false);
                 break;
             case 5:
                 System.out.println("\n\t MISION UNICA: DERROTAR UNA DE LAS BESTIAS DE MARTIN [Lv. 50]");
@@ -610,11 +695,7 @@ public class Juego {
         
         if ((player.getNivel() < 11) || (player.getRango().equals("Kage"))){
             System.out.print("[3] Dejar el juego como un pérdedor.\nElige una acción: ");
-            int respuesta = eleccion();
-
-            
-            // while ((respuesta > 3) || (respuesta < 1)){
-            
+            int respuesta = eleccion();    
             while (((respuesta > 3) || (respuesta < 1)) && (respuesta != 48947)){ //DEBUG ONLY
                 System.out.print("Opcion no valida, ingresa otra (1, 2 o 3): ");
                 respuesta = eleccion();

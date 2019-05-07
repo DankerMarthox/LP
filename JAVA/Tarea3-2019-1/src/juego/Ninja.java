@@ -35,5 +35,7 @@ public abstract class Ninja {
     
     abstract String getAldea();
 
-    
+    public int getLevelJutsts(){
+        return this.nivel_Jutsu;
+    }
 }
