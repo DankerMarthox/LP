@@ -34,8 +34,23 @@ public class Jugador implements Personaje{
     }
     
     @Override
-    public void realizarAtaque(){
-        
+    public int realizarAtaque(int type, int Jutsu){
+        int atk = 0;
+        switch(type){
+            case 0:
+                atk = this.ataque;
+                break;
+            case 1:
+                switch(Jutsu){
+                    case 0:
+                        atk = this.nivel * this.ninja.usarJutsu(Jutsu);
+                    case 1:
+                        atk = this.ninja.usarJutsu(1);
+                    case 3:
+                        atk = this.nivel * this.ninja.usarJutsu(3);
+                }
+        }
+        return atk;
     }    
     
     
@@ -72,7 +87,7 @@ public class Jugador implements Personaje{
     
     @Override
     public void asignarAtaqueFisico(){
-        
+        this.ataque = this.nivel + this.modificadorArma + 3;
     }
     
     @Override
@@ -81,24 +96,21 @@ public class Jugador implements Personaje{
         switch (rareza){    
             case "Comun":
                 this.modificadorArma = 2;
-                this.ataque = 5 + this.nivel;
                 break;
                 
             case "Rara":
                 this.modificadorArma = 3;
-                this.ataque = 6 + this.nivel;
                 break;
                  
             case "Epica":
                 this.modificadorArma = 4;
-                this.ataque = 7 + this.nivel;
                 break;
                              
             case "Legendaria":
                 this.modificadorArma = 5;
-                this.ataque = 8 + this.nivel;
                 break;
         }
+        asignarAtaqueFisico();
     }
     
     @Override
@@ -110,7 +122,7 @@ public class Jugador implements Personaje{
     public void asignarNivel(int nivel){
         this.nivel = nivel;
         this.vidaMaxima = 100 + this.nivel;
-        this.ataque = 3 + this.nivel + this.modificadorArma;
+        asignarAtaqueFisico();
         if (this.vida < this.vidaMaxima){
             this.vida += 1;
         }
@@ -139,8 +151,7 @@ public class Jugador implements Personaje{
     
     public void asignarOro(int oro){
         this.oro = oro;
-    }
-    
+    } 
     
 ///////////////////////////////////////////////    
     
@@ -197,6 +208,11 @@ public class Jugador implements Personaje{
     }
     public int getMaxVida(){
         return this.vidaMaxima;
+    }
+
+    public void displayJutsus(){
+        System.out.println("\n[0] "+this.ninja.Jutsu_1+"\n[1] " + this.ninja.Jutsu_2 +
+        "\n[2] " + this.ninja.Jutsu_3);
     }
     
 }

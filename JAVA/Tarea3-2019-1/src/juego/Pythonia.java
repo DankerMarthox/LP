@@ -19,13 +19,7 @@ public class Pythonia extends Ninja{
     @Override
     public void asignarNivelJutsus(){
         
-    }
-    
-    @Override
-    public void usarJutsu(){
-        
-    }
-    
+    }    
     @Override
     public String getAldea(){
         return "Pythonia";

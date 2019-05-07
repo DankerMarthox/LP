@@ -1,8 +1,9 @@
 package juego;
 
+
+
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-
 import java.util.ArrayList;
 
 public class Juego {
@@ -311,41 +312,43 @@ public class Juego {
     
     public ArrayList<Enemigo> createEnemies(int level, Boolean flag){
 
-        String[] enemies = { "Klrak", "Adran", "Isaac", "Elysium", "Krrogh", "Jenkins","Potato","Muramasacchan", "IanPom" };
+        String[] enemies = { "Klrak", "Adran", "Isaac", "Elysium", "Krrogh", "Jenkins","Potato","Muramasacchan", "IanPom","ElPEPEENOJON" };
         ArrayList<Enemigo> Enemies = new ArrayList<Enemigo>();
-
         int enemyno = ThreadLocalRandom.current().nextInt(1,7);
-
         Enemigo Enemigo;
-
         int i;
-
         switch(level){
             case 1:
-                if(enemyno >= 4){
+                if(enemyno > 3){
                     Enemigo = new Enemigo();
+                    Enemigo.asignarNinja(generarAldea());
+                    Enemigo.asignarRango("Ifnin");
                     Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                     Enemigo.asignarNivel(1);
                     Enemies.add(Enemigo);
                 }
                 break;
-
             case 4:
                 Enemigo = new Enemigo();
+                Enemigo.asignarRango("Fornin");
+                Enemigo.asignarNinja(generarAldea());
                 Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                 Enemigo.asignarNivel(4);
                 Enemies.add(Enemigo);
                 break;
-
             case 6:
-                if (flag || (enemyno <= 4)) {
+                if (flag || (enemyno < 4)) {
                     Enemigo = new Enemigo();
+                    Enemigo.asignarRango("Fornin");
+                    Enemigo.asignarNinja(generarAldea());
                     Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                     Enemigo.asignarNivel(6);
                     Enemies.add(Enemigo);
                 }else{
                     for(i = 0; i < 2; i++){
                         Enemigo = new Enemigo();
+                        Enemigo.asignarRango("Fornin");
+                        Enemigo.asignarNinja(generarAldea());
                         Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                         Enemigo.asignarNivel(6);
                         Enemies.add(Enemigo);
@@ -354,14 +357,18 @@ public class Juego {
                 break;
 
             case 8:
-                if (flag || (enemyno <= 4)) {
+                if (flag || (enemyno < 4)) {
                     Enemigo = new Enemigo();
+                    Enemigo.asignarRango("Whilenin");
+                    Enemigo.asignarNinja(generarAldea());
                     Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                     Enemigo.asignarNivel(6);
                     Enemies.add(Enemigo);
             } else {
                 for (i = 0; i < 2; i++) {
                     Enemigo = new Enemigo();
+                    Enemigo.asignarRango("Whilenin");
+                    Enemigo.asignarNinja(generarAldea());
                     Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                     Enemigo.asignarNivel(6);
                     Enemies.add(Enemigo);
@@ -372,12 +379,16 @@ public class Juego {
             case 10:
                 if (flag) {
                     Enemigo = new Enemigo();
+                    Enemigo.asignarRango("Whilenin");
+                    Enemigo.asignarNinja(generarAldea());
                     Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                     Enemigo.asignarNivel(10);
                     Enemies.add(Enemigo);
                 } else {
                     for (i = 0; i < 2; i++) {
                         Enemigo = new Enemigo();
+                        Enemigo.asignarRango("Whilenin");
+                        Enemigo.asignarNinja(generarAldea());
                         Enemigo.asignarNombre(enemies[ThreadLocalRandom.current().nextInt(0, 10)]);
                         Enemigo.asignarNivel(10);
                         Enemies.add(Enemigo);
@@ -395,6 +406,7 @@ public class Juego {
         System.out.println("\tArma: " + player.getArma());
         System.out.println("\tRango: " + player.getRango());
     }
+
     public void DisplayBattleEnemy(Enemigo e){
         System.out.println("\nEnemy Stats");
         System.out.println("\n\tHP: " + e.getVida());
@@ -403,28 +415,62 @@ public class Juego {
     }
 
     public void Battle(ArrayList<Enemigo> enemies, Jugador player, int level){
-
         int Total = enemies.size();
         Boolean won = false;
         int gorudo = 0;
         int life = player.getVida();
+        int election;
+        Boolean one = false;
         switch(Total){
+            case 0:
+                one = true;
+                break;
             case 1:
                 System.out.println("\nTOMC... Vas felizmente a hacer tu misión, cuando derepente... ");
                 System.out.println("\n" + enemies.get(0).getNombre() + " Te desafía a una batalla!!!!!!!");
                 System.out.println("\n" + enemies.get(0).getNombre() + ": " + nameLine(enemies.get(0).getNombre()));
-                while(player.getVida() > 0){
+                while((player.getVida() > 0) && (enemies.get(0).getVida() > 0)){
+                    
+                    System.out.println("[ON BATTLE]");
                     DisplayBattleEnemy(enemies.get(0));
                     System.out.println();
                     DisplayBattlePlayer(player);
-                    player.asignarVida(-999);
+
+                    System.out.println("\nQue harás???... O.o");
+                    System.out.println("[0] Usar la cabeza... \n[1] Dark Matter Blaze... ");
+                    election = eleccion();
+                    while ((election > 1) || (election < 0)) {
+                        System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
+                        election = eleccion();
+                    }
+                    if(election == 1){
+                        System.out.print("\nElige tu técnica preferida: ");
+                        player.displayJutsus();
+                        election = eleccion();
+                        while ((election > 2) || (election < 0)) {
+                            System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
+                            election = eleccion();
+                        }
+                        enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(1,election));
+                    }else{
+                        enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0,election));
+                    }
+                    player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0,0));
+                }
+                if(enemies.get(0).getVida() < 1 ) {
+                    won = true;
                 }
                 break;
             case 2:
                 break;
         }
-        
-        if (won) {
+        if (one){
+            player.asignarExperiencia(10);
+            System.out.println("Has ganado " + 10 + " exp.");
+            gorudo = ThreadLocalRandom.current().nextInt(5, 11);
+            player.asignarOro(player.getOro() + gorudo);
+            System.out.println("Te has ganado " + gorudo + " de oro.\n\n[MISSION COMPLETE]\n");
+        }else if (won) {
             System.out.println(
                     "Estuvo buena la pelea, + 10 y a favoritos. " + player.getNombre() + "\nCompetaste la mision!");
             switch (level) {
@@ -454,15 +500,15 @@ public class Juego {
                 gorudo = ThreadLocalRandom.current().nextInt(130, 161);
                 break;
             }
-            System.out.println("Te has ganado " + gorudo + "de oro.\n\n[MISSION COMPLETE]\n");
+            System.out.println("Te has ganado " + gorudo + " de oro.\n\n[MISSION COMPLETE]\n");
             System.out.println("Máquina... Troesma... Campeón... Dios... Genio... (LOL)\nTe regeneraré tu vida. ;)");
 
             player.asignarOro(player.getOro() + gorudo);
         } else {
-            player.asignarVida(life);
             System.out.println("\n\t"+player.getNombre()+": I need healing...");
             System.out.println("[YOU LOSE]\nPerdedor... manqueque te apuesto a que eres ifnin.\nTe regeneraré tu vida, pero que no se vuelva a repetir ah?...");
         }
+        player.asignarVida(life);
         System.out.println("[HEALING]");
         System.out.println("\n\t"+player.getNombre()+".asignarvida(" + life + ").\n");
     }
@@ -496,6 +542,7 @@ public class Juego {
             case 0:
                 System.out.println("\n\t[0] Encontrar al gato de la señora Puff.\n\t[1] Entrega del Little Caesar's.");
                 Enemies = createEnemies(1,false);
+                Battle(Enemies, player, 1);
                 break;
             case 1:
                 System.out.println("\n\t[0] Obtener un 5* en FGO [MEGADIFICIL].\n\t[1] Entregar mi tarea de JAVA.");
@@ -545,8 +592,6 @@ public class Juego {
                 }
                 break;
         }
-        
-
         System.out.println("\nDEBUG -- MISION REALIZADA");
         player.asignarEnergia(player.getEnergia() - 5);
         player.asignarExperiencia(97);

@@ -22,11 +22,6 @@ public class Javania extends Ninja{
     }
     
     @Override
-    public void usarJutsu(){
-        
-    }
-    
-    @Override
     public String getAldea(){
         return "Javania";
     }

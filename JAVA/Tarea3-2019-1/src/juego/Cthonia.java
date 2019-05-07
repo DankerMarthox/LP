@@ -22,11 +22,6 @@ public class Cthonia extends Ninja{
     }
     
     @Override
-    public void usarJutsu(){
-        
-    }
-    
-    @Override
     public String getAldea(){
         return "Cthonia";
     }

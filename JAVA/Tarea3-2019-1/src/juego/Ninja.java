@@ -1,5 +1,7 @@
 package juego;
 
+
+
 public abstract class Ninja {
     
     protected String Jutsu_1;
@@ -15,7 +17,21 @@ public abstract class Ninja {
     
     abstract void asignarNivelJutsus();
     
-    abstract void usarJutsu();
+    public int usarJutsu(int Jutsu){
+        int dmg = 0;
+        switch(Jutsu){
+            case 0:
+                dmg = this.nivel_Jutsu;
+                break;
+            case 1:
+                dmg = 2 * this.nivel_Jutsu;
+                break;
+            case 2:
+                dmg = 3;
+                break;
+        }
+        return dmg;
+    }
     
     abstract String getAldea();
 }

@@ -22,11 +22,6 @@ public class Prolonia extends Ninja{
     }
     
     @Override
-    public void usarJutsu(){
-        
-    }
-    
-    @Override
     public String getAldea(){
         return "Prolonia";
     }

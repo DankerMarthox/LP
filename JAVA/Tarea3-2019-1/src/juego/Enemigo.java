@@ -1,5 +1,8 @@
 package juego;
 
+
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Enemigo implements Personaje{
     
     private int vida;
@@ -23,9 +26,18 @@ public class Enemigo implements Personaje{
         this.ataque = 4;
     }
 
-     @Override
-    public void realizarAtaque(){
-        
+    @Override
+    public int realizarAtaque(int type, int Jutsu){
+        int atk = 0;
+        switch (type) {
+            case 0:
+                atk = this.ataque;
+                break;
+            case 1:
+                atk = this.ninja.usarJutsu(Jutsu);
+                break;
+        }
+        return atk;
     }    
      
     @Override

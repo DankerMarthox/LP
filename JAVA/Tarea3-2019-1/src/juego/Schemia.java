@@ -20,11 +20,6 @@ public class Schemia extends Ninja{
     public void asignarNivelJutsus(){
         
     }
-    
-    @Override
-    public void usarJutsu(){
-        
-    }
         
     @Override
     public String getAldea(){

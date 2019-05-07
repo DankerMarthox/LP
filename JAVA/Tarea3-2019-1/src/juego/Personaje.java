@@ -14,7 +14,7 @@ public interface Personaje{
     
     void asignarRango(String rango);
     
-    void realizarAtaque();
+    int realizarAtaque(int type, int Jutsu);
     
     void asignarNivel(int nivel);
     
