@@ -43,12 +43,16 @@ public class Jugador implements Personaje{
             case 1:
                 switch(Jutsu){
                     case 0:
-                        atk = this.nivel * this.ninja.usarJutsu(Jutsu);
+                        atk = this.nivel * this.ninja.usarJutsu(0);
+                        break;
                     case 1:
                         atk = this.ninja.usarJutsu(1);
-                    case 3:
-                        atk = this.nivel * this.ninja.usarJutsu(3);
+                        break;
+                    case 2:
+                        atk = this.nivel * this.ninja.usarJutsu(2);
+                        break;
                 }
+                break;
         }
         return atk;
     }    

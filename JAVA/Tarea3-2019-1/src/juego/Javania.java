@@ -6,7 +6,7 @@ public class Javania extends Ninja{
         this.Jutsu_1 = "Jutsu Clones de Clases";
         this.Jutsu_2 = "Atadura de Súper Clase";
         this.Jutsu_3 = "Tsunami de Objetos";
-        this.nivel_Jutsu = 0;
+        this.nivel_Jutsu = 1;
     }
 
     @Override

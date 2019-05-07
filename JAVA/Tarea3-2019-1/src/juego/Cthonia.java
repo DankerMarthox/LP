@@ -6,7 +6,7 @@ public class Cthonia extends Ninja{
         this.Jutsu_1 = "Freedori";
         this.Jutsu_2 = "Punteringan";
         this.Jutsu_3 = "Malloc Tensei";
-        this.nivel_Jutsu = 0;
+        this.nivel_Jutsu = 1;
     }
 
     @Override

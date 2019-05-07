@@ -6,7 +6,7 @@ public class Schemia extends Ninja{
         this.Jutsu_1 = "Parentesiyomi Infinito";
         this.Jutsu_2 = "Jutsu Recursión de Fuego";
         this.Jutsu_3 = "Letsano";
-        this.nivel_Jutsu = 0;
+        this.nivel_Jutsu = 1;
     }
 
     @Override

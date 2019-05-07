@@ -6,7 +6,7 @@ public class Prolonia extends Ninja{
         this.Jutsu_1 = "Confusion Falso Verdadero";
         this.Jutsu_2 = "Querykugan";
         this.Jutsu_3 = "Gran Explosión de Backtracking";
-        this.nivel_Jutsu = 0;
+        this.nivel_Jutsu = 1;
     }
 
     @Override

@@ -6,7 +6,7 @@ public class Pythonia extends Ninja{
         this.Jutsu_1 = "Jutsu Mil Años de Interpretación";
         this.Jutsu_2 = "Jutsu Multi Tamaño";
         this.Jutsu_3 = "Técnica de Confusión de Variables";
-        this.nivel_Jutsu = 0;
+        this.nivel_Jutsu = 1;
     }
 
     @Override

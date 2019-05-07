@@ -404,6 +404,7 @@ public class Juego {
         System.out.println("\n\tHP: " + player.getVida());
         System.out.println("\tLvl: " + player.getNivel());
         System.out.println("\tArma: " + player.getArma());
+        System.out.println("\tJutsus: Lvl. " + player.)
         System.out.println("\tRango: " + player.getRango());
     }
 
@@ -451,8 +452,11 @@ public class Juego {
                             System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
                             election = eleccion();
                         }
+                        System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLL");
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(1,election));
                     }else{
+                    System.out.println("Hai domo");
+                        
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0,election));
                     }
                     player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0,0));
@@ -557,7 +561,7 @@ public class Juego {
                 //flag
                 Enemies = createEnemies(6,false);
                 Enemies2 = createEnemies(6,true);
-                System.out.println("\n\t[0] Asesinar al asesino que asesinó a Abaccio.\n\t[1] Entrega de la cabeza de Marie Antoinette.");
+                System.out.println("\n\t[0] Asesinar al asesino que asesinó a Abaccio.\n\t[1] Entrega de la cabeza de Marie Antoinette. (WAZZUP MY HOMIES)");
                 if (player.getNivel() < 6) {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
