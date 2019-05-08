@@ -132,4 +132,8 @@ public class Enemigo implements Personaje{
     public String getRango(){
         return this.rango;
     }
+    
+    public int getLevelJutsts() {
+        return this.ninja.getLevelJutsts();
+    }
 }

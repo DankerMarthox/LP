@@ -5,6 +5,7 @@ package juego;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Juego {
 
@@ -32,7 +33,7 @@ public class Juego {
 
     //TODO agregar mas frases
     public static String nameLine(String enemyName) {
-        int num = ThreadLocalRandom.current().nextInt(0,3);
+        int num = ThreadLocalRandom.current().nextInt(0,6);
         String Line = "";
         switch (num) {
 
@@ -46,6 +47,12 @@ public class Juego {
         case 2:
             Line = "This isn´t very cash money of you... I'm " + enemyName + ", I'm going to kill you <3";
             break;
+        case 3:
+            Line = "HAH... GAYYYYYYYYYYY";
+        case 4:
+            Line = "HAHA... YES! Тульский";
+        case 5:
+            Line = "MA NEM JEFFF";
         default:
             Line = "" + enemyName;
         }
@@ -151,7 +158,6 @@ public class Juego {
             }                        
         }        
     }
-    
     public void displayResultado(String arma, String rareza, Jugador player){
         switch(rareza){ 
             case "Comun":
@@ -186,7 +192,6 @@ public class Juego {
             nombreArma = "Fierro con Clavos";
             System.out.println("Estaba el baner de "+nombreArma+" suerte.");
         }
-
         else if (random < 5){
             rareza = "Epica";
             int arma = ThreadLocalRandom.current().nextInt(1,3);
@@ -202,7 +207,6 @@ public class Juego {
             System.out.println("Te la cambio por una pizza, no?... ok");
             System.out.println("Estaba el baner de " + nombreArma);
         }
-        
         else if (random < 11){
             rareza = "Rara";
             int arma = ThreadLocalRandom.current().nextInt(1,3);
@@ -217,7 +221,6 @@ public class Juego {
             System.out.println("Si hacemos la equivalencia con los habbo creditos, creo que sales ganando");
             System.out.println("Aun asi, creo que los diamantes de minecraft valen mas");
         }
-        
         else{
             rareza = "Comun";
             int arma = ThreadLocalRandom.current().nextInt(1,4);  
@@ -266,10 +269,9 @@ public class Juego {
             else{
                 System.out.println("\n¿¡OTRA VEZ CON 299!?... Vaya a pedirle 1 de oro a su abuela *laughs at you*");
             }
-
         }
-        
         else{
+            clearScreen();
             System.out.println("Que manera de desperdiciar dinero... Sabes que puedes usar CCC verdad?");
             System.out.println("Que es CCC dices?... Obvio que un juego de fate...");
             System.out.println("Quiero decir... CLOSE CODE COMBAT");
@@ -308,9 +310,7 @@ public class Juego {
                 /// INICIAR COMBATE
         }           
     }    
-
     public ArrayList<Enemigo> createEnemies(int level, Boolean flag){
-
         String[] enemies = { "Klrak", "Adran", "Isaac", "Elysium", "Krrogh", "Jenkins","Potato","Muramasacchan", "IanPom","ElPEPEENOJON" };
         ArrayList<Enemigo> Enemies = new ArrayList<Enemigo>();
         int enemyno = ThreadLocalRandom.current().nextInt(1,7);
@@ -397,24 +397,45 @@ public class Juego {
         }
         return Enemies;
     }
+    
+    public String repeatNTimes(String s, int n) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            builder.append(s);
+        }
+        return builder.toString();
+    }
 
     public void DisplayBattlePlayer(Jugador player){
-        System.out.println("\nTus Stats");
-        System.out.println("\n\tHP: " + player.getVida());
-        System.out.println("\tLvl: " + player.getNivel());
-        System.out.println("\tArma: " + player.getArma());
-        System.out.println("\tJutsus: Lvl. " + player.getLevelJutsts());
-        System.out.println("\tRango: " + player.getRango());
+        int xd = Math.abs(player.getVida()/10);
+        if(player.getVida() < 11){
+            xd = 1;
+        }
+        System.out.println("________________________________________ ");
+        System.out.println("| "+player.getNombre()+"'s Stats");
+        System.out.println("|_______________________________________ ");
+        System.out.println("|\tHP: " +repeatNTimes("=", xd)+ " "
+                                 + player.getVida()+"\tLvl: " + player.getNivel());
+        System.out.println("|\tRango: " + player.getRango()+"\tJutsus: Lvl. " + player.getLevelJutsts());
+        System.out.println("|\tArma: " + player.getArma());
+        System.out.print("---------------------------------------- ");
     }
 
     public void DisplayBattleEnemy(Enemigo e){
-        System.out.println("\nEnemy Stats");
-        System.out.println("\n\tHP: " + e.getVida());
-        System.out.println("\tLvl: " + e.getNivel());
-        System.out.println("\tRango: " + e.getRango());
+        int xd = Math.abs(e.getVida()/10);
+        if (e.getVida() < 11) {
+            xd = 1;
+        }
+        System.out.println("________________________________________ ");
+        System.out.println("| "+ e.getNombre()+"'s Stats");
+        System.out.println("|_______________________________________ ");
+        System.out.println("|\tHP: "+ repeatNTimes("=", xd)+ " " + 
+                                e.getVida()+"\tLvl: " + e.getNivel());
+        System.out.println("|\tRango: " + e.getRango()+"\tJutsus: Lvl. " + e.getLevelJutsts());
+        System.out.print("----------------------------------------");
     }
 
-    public void Battle(ArrayList<Enemigo> enemies, Jugador player, int level, Boolean second){
+    public Boolean Battle(ArrayList<Enemigo> enemies, Jugador player, int level, Boolean second){
         int Total = enemies.size();
         Boolean won = false;
         int gorudo = 0;
@@ -431,7 +452,7 @@ public class Juego {
                 System.out.println("\n" + enemies.get(0).getNombre() + " Te desafía a una batalla!!!!!!!");
                 System.out.println("\n" + enemies.get(0).getNombre() + ": " + nameLine(enemies.get(0).getNombre()));
                 while((player.getVida() > 0) && (enemies.get(0).getVida() > 0)){
-                    
+                    clearScreen();
                     System.out.println("[ON BATTLE]");
                     DisplayBattleEnemy(enemies.get(0));
                     System.out.println();
@@ -439,27 +460,36 @@ public class Juego {
 
                     System.out.println("\nQue harás???... O.o");
                     System.out.println("[0] Usar la cabeza... \n[1] Dark Matter Blaze... ");
+                    System.out.print("Selección: ");
                     election = eleccion();
                     while ((election > 1) || (election < 0)) {
+                        System.out.print("El único trabajo que tenías lo hiciste mal");
                         System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
                         election = eleccion();
                     }
                     if(election == 1){
                         System.out.print("\nElige tu técnica preferida: ");
                         player.displayJutsus();
+                        System.out.print("Selección: ");
                         election = eleccion();
                         while ((election > 2) || (election < 0)) {
+                            System.out.print("Pls, selecciona bien pedazo de...");
                             System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
                             election = eleccion();
                         }
-                        System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLL");
+                        System.out.print("\n"+enemies.get(0).getNombre()+": Oh no....");                        
+                        System.out.print("\n" + player.getNombre() + ": Oh siii... *su wate al enemigo*");
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(1,election));
-                    }else{
-                    System.out.println("Hai domo");
-                        
+                    }else{                        
+                        System.out.print("\n"+player.getNombre()+": RASHO LAAAASER!");
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0,election));
+                        System.out.print("\n"+enemies.get(0).getNombre()+": Gahhhhh!!!!!!, justo en la soledad.");
                     }
+                    System.out.print("\n - " + enemies.get(0).getNombre() + " - Te pegó un wate");
+                    System.out.print("\n" + enemies.get(0).getNombre()+": Tomá sunuvabitch, tomá...");
                     player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0,0));
+                    System.out.print("\n" + player.getNombre()+": NOooooooooOOoOoooOO....\n");
+
                 }
                 if(enemies.get(0).getVida() < 1 ) {
                     won = true;
@@ -470,24 +500,31 @@ public class Juego {
             // este par de weones te desafian a una batalla de mitos y leyendas o una
             // batalla de gallos
             // a quien atacas primero?
-
+            System.out.print("Espero que estés preparado para un trío...\n");            
+            System.out.print("\n"+enemies.get(0).getNombre()+": Hey mister... *te agarra del hombro*");
+            System.out.print("\n" + enemies.get(1).getNombre() + ": Yeah BOIIIIIIIIIIIIIIIIIIII.... *slaps yo ass*");
             while(player.getVida() > 0){
                 if(won){
+                    System.out.print("\nIbas caminando por ahí y encontraste lo que estabas buscando....");
+                    System.out.print("Felicidades...  misión completa. Sigues siendo un manqueque btw.");
                     break;
                 }
                 if(enemies.size()>1){
-                    System.out.println("[ON BATTLE]"); // esta este weon
+                    System.out.println("\t\t\t[ON BATTLE]"); // esta este weon
                     DisplayBattleEnemy(enemies.get(0)); //y este otro weon
                     DisplayBattleEnemy(enemies.get(1));
                     System.out.println();
                     DisplayBattlePlayer(player);// y vo gil culiao
-
+                    System.out.println("Who do you wanna do first?...."); // esta este weon
                     //a quien atacai enfermo ql
+                    System.out.print("Liisto: "); // esta este weon
                     rival = eleccion();
                     while ((rival > 1) || (rival < 0)) {
-                        System.out.print("Opcion no valida, ingresa otra (0 o 1): ");
+                        System.out.print("Para de fallar xfa..\nOpcion no valida, ingresa otra (0 o 1): ");
                         rival = eleccion();
                     }
+                    System.out.println("Elige tu Devil's action.");
+                    System.out.print("Tipo atk: "); // esta este weon
                     //como lo atacai aweonao
                     election = eleccion();
                     while ((election > 1) || (election < 0)) {
@@ -502,14 +539,26 @@ public class Juego {
                             System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
                             election = eleccion();
                         }
+                        System.out.println("\n"+player.getNombre()+": mueeeerreeeeeeee!!!!!!"); // esta este weon                        
+                        System.out.println("\n"+enemies.get(rival).getNombre()+ "Gaaahhh... mi espada sagrada Excalibur...."); // esta este weon
                         enemies.get(rival).asignarVida(enemies.get(rival).getVida() - player.realizarAtaque(1, election));
+
                     } else {
+                        System.out.println("\n"+ player.getNombre()+": ORAORAORAORAORAORAORAORA"); // esta este weon
+                        System.out.println("\n"+enemies.get(rival).getNombre()+": MUDAMUDAMUDAMUDAMUDAMUDA....."); // esta este weon
                         enemies.get(rival).asignarVida(enemies.get(rival).getVida() - player.realizarAtaque(0, election));
                     }
+                    System.out.println("\n" + enemies.get(0).getNombre()+": ROAD ROLLER DAAAAAAAAA");
+                    System.out.print("\n - " + enemies.get(0).getNombre() + " - Te pegó un wate");
+                    System.out.println("\n"+ enemies.get(1).getNombre()+": JUTSU DE INVOCACIÓN..... MENDOZAAAAAAAA!!!!");
+                    System.out.print("\n - " + enemies.get(1).getNombre() + " - Te pegó un wate");
+                    System.out.println("\n" + player.getNombre() + ": NOOOOOOOOOOOOOOOOO....");                    
                     player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0, 0));
+                    player.asignarVida(player.getVida() - enemies.get(1).realizarAtaque(0, 0));
 
                 }else{
                     //parte con unn solo weon
+                    System.out.println("HAH, Solo te falta uno... ponle weno");
                     System.out.println("[ON BATTLE]");
                     DisplayBattleEnemy(enemies.get(0));
                     System.out.println();
@@ -530,12 +579,18 @@ public class Juego {
                             System.out.print("Opcion no valida, ingresa otra (0, 1 o 2): ");
                             election = eleccion();
                         }
+                        System.out.println("\n" + enemies.get(0).getNombre() + ": Te acercas a mí....");
+                        System.out.println("\n" + player.getNombre()+": (I can't beat the sh*t out of you without getting closer)-NO JUTSU.... ORAAA");
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(1, election));
                     } else {
+                        System.out.println("\n" + player.getNombre() + ": TOMA TU 20 EN EL CERTAMEN!");
+                        System.out.println("\n" + enemies.get(0).getNombre() + ": Por qué me haces esto, Solaaaar. *hwrrgggmm*");
                         enemies.get(0).asignarVida(enemies.get(0).getVida() - player.realizarAtaque(0, election));
                     }
+                    System.out.print("\n - " + enemies.get(0).getNombre() + " - Te pegó un wate");
+                    System.out.print("\n" + enemies.get(0).getNombre() + ": Katon... PASAR MATE A LA 3ra-NO JUTSU");
+                    System.out.print("\n - " + player.getNombre() + " - NOOOOOOO ME CONVERTÍ EN EL CHAQUETAAAA\n");
                     player.asignarVida(player.getVida() - enemies.get(0).realizarAtaque(0, 0));
-                    player.asignarVida(player.getVida() - enemies.get(1).realizarAtaque(0, 0));
                 }
                 if (enemies.get(0).getVida() < 1 && enemies.get(1).getVida() < 1) {
                     won = true;
@@ -593,11 +648,17 @@ public class Juego {
             player.asignarVida(player.getMaxVida());
             System.out.println("\n\t" + player.getNombre() + ".asignarvida(" + life + ").\n");
         }
+        if(won){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void realizarMision(Jugador player){
         /// Misiones por definir ///
         int enemiesLv = 1;
+        Boolean won = false;
         ArrayList<Enemigo> Enemies;
         ArrayList<Enemigo> Enemies2;
         ArrayList<Enemigo> Enemies3;
@@ -623,29 +684,44 @@ public class Juego {
         switch(selection){
             case 0:
                 System.out.println("\n\t[0] Encontrar al gato de la señora Puff.\n\t[1] Entrega del Little Caesar's.");
+                selection = eleccion();
+                while ((selection > 1) || (selection < 0)) {
+                    System.out.print("Opcion no valida, ingresa otra (0 al 1): ");
+                    selection = eleccion();
+                }
                 Enemies = createEnemies(1,false);
-                Battle(Enemies, player, 1,false);
+                won = Battle(Enemies, player, 1,false);
                 break;
             case 1:
                 System.out.println("\n\t[0] Obtener un 5* en FGO [MEGADIFICIL].\n\t[1] Entregar mi tarea de JAVA.");
+                selection = eleccion();
+                while ((selection > 1) || (selection < 0)) {
+                    System.out.print("Opcion no valida, ingresa otra (0 al 1): ");
+                    selection = eleccion();
+                }
                 Enemies = createEnemies(4,false);
                 if(player.getNivel() < 4) {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
                 }
-                Battle(Enemies, player, 4, false);
+                won = Battle(Enemies, player, 4, false);
                 break;
             case 2:
                 //flag
                 Enemies = createEnemies(6,false);
                 Enemies2 = createEnemies(6,true);
                 System.out.println("\n\t[0] Asesinar al asesino que asesinó a Abaccio.\n\t[1] Entrega de la cabeza de Marie Antoinette. (WAZZUP MY HOMIES)");
+                selection = eleccion();
+                while ((selection > 1) || (selection < 0)) {
+                    System.out.print("Opcion no valida, ingresa otra (0 al 1): ");
+                    selection = eleccion();
+                }
                 if (player.getNivel() < 6) {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
+                }if(Battle(Enemies, player, 6, false) && Battle(Enemies2, player, 6, false)){
+                    won = true;
                 }
-                Battle(Enemies, player, 6, false);
-                Battle(Enemies2, player, 6, false);
                 break;
             case 3:
                 Enemies = createEnemies(8, false);
@@ -655,9 +731,16 @@ public class Juego {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala");
                 }
-                Battle(Enemies, player, 8, false);
-                Battle(Enemies2, player, 8, false);
-
+                selection = eleccion();
+                while ((selection > 1) || (selection < 0)) {
+                    System.out.print("Opcion no valida, ingresa otra (0 al 1): ");
+                    selection = eleccion();
+                }
+                if(Battle(Enemies, player, 8, false) && Battle(Enemies2, player, 8, false)){
+                    won = true;
+                }else{
+                    won = false;
+                }
                 break;
             case 4:
                 Enemies = createEnemies(10, false);
@@ -669,22 +752,33 @@ public class Juego {
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE]"); 
                     System.out.println("\nPero igual la harás... Arpende a la mala"); 
                 }
-                Battle(Enemies, player, 10, false);
-                Battle(Enemies2, player, 10, false);
-                Battle(Enemies3, player, 10, false);
+                selection = eleccion();
+                while ((selection > 1) || (selection < 0)) {
+                    System.out.print("Opcion no valida, ingresa otra (0 al 1): ");
+                    selection = eleccion();
+                }
+                if(Battle(Enemies, player, 10, false) && Battle(Enemies2, player, 10, false) && Battle(Enemies3, player, 10, false)){
+                    won = true;
+                }else{
+                    won = false;
+                }
                 break;
             case 5:
                 System.out.println("\n\t MISION UNICA: DERROTAR UNA DE LAS BESTIAS DE MARTIN [Lv. 50]");
                 if(player.getNivel()>49){
+                    selection = eleccion();
+                    while ((selection > 1) || (selection < 0)) {
+                        System.out.print("Opcion no valida, ingresa otra (1): ");
+                        selection = eleccion();
+                    }
                     LassBossXheroFunc(player);
                 }else{
                     System.out.println("\nYo creo que deberías farmear más... [NIVEL INSUFICIENTE][SORRY][SELECT ANOTHER ONE]");
                 }
                 break;
         }
-        System.out.println("\nDEBUG -- MISION REALIZADA");
+        System.out.println("[END OF MISSION]\n");
         player.asignarEnergia(player.getEnergia() - 5);
-        player.asignarExperiencia(97);
     }
     
     public void menu(Jugador player){
