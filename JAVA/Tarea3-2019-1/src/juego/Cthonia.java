@@ -16,10 +16,6 @@ public class Cthonia extends Ninja{
         super.Jutsu_3 = this.Jutsu_3;
     }
     
-    @Override
-    public void asignarNivelJutsus(){
-        
-    }
     
     @Override
     public String getAldea(){

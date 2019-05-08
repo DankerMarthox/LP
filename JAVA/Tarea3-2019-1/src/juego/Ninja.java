@@ -15,7 +15,9 @@ public abstract class Ninja {
     
     abstract void crearNinja();
     
-    abstract void asignarNivelJutsus();
+    public void asignarNivelJutsus(int n){
+        this.nivel_Jutsu = n;
+    }
     
     public int usarJutsu(int Jutsu){
         int dmg = 0;

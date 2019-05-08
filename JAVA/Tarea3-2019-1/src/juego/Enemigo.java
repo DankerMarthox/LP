@@ -52,6 +52,11 @@ public class Enemigo implements Personaje{
         this.ataque = 3 + this.nivel + this.modificadorArma;
         if (this.vida < this.vidaMaxima){
             this.vida += 1;
+        }
+        if (nivel == 3) {
+            this.ninja.asignarNivelJutsus(2);
+        } else if (nivel == 7) {
+            this.ninja.asignarNivelJutsus(3);
         }      
     }
     
@@ -83,7 +88,7 @@ public class Enemigo implements Personaje{
     
     @Override
     public void asignarAtaqueFisico(){
-        
+        this.ataque = this.nivel + this.modificadorArma + 3;
     }
     
     @Override
@@ -115,6 +120,9 @@ public class Enemigo implements Personaje{
     @Override
     public void asignarRango(String rango){
         this.rango = rango;
+        if (rango == "Kage") {
+            this.ninja.asignarNivelJutsus(4);
+        }
     }        
    
     

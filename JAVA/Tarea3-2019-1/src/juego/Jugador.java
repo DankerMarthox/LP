@@ -120,6 +120,9 @@ public class Jugador implements Personaje{
     @Override
     public void asignarRango(String rango){
         this.rango = rango;
+        if(rango == "Kage"){
+            this.ninja.asignarNivelJutsus(4);
+        }
     }        
     
     @Override
@@ -132,11 +135,16 @@ public class Jugador implements Personaje{
         }
         if (nivel == 3){
             this.rango = "Fornin";
+            this.ninja.asignarNivelJutsus(2);
         }
         else if(nivel == 5){
             System.out.println("El nivel 5 es invencible... Lol");
         }
         else if (nivel == 7){
+            this.rango = "Whilenin";
+            this.ninja.asignarNivelJutsus(3);
+        }
+        else if(nivel >99){
             this.rango = "Whilenin";
         }
     }
@@ -150,7 +158,7 @@ public class Jugador implements Personaje{
         if (this.experiencia > 99){
             asignarNivel(this.nivel+1);
             this.experiencia -= 100;
-        }    
+        }
     }
     
     public void asignarOro(int oro){
@@ -184,6 +192,12 @@ public class Jugador implements Personaje{
     }
     
     public String getRango(){
+        if((this.rango.equals("Kage")) && (this.nivel > 100)){
+            return "Kage/Sennin";
+        }
+        if(this.nivel > 100){
+            return "Sennin";
+        }
         return this.rango;
     }
     
