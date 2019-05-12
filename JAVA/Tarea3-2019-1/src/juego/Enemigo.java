@@ -1,8 +1,5 @@
 package juego;
 
-
-import java.util.concurrent.ThreadLocalRandom;
-
 public class Enemigo implements Personaje{
     
     private int vida;
@@ -48,14 +45,14 @@ public class Enemigo implements Personaje{
     @Override
     public void asignarNivel(int nivel){
         this.nivel = nivel;
-        this.vidaMaxima = 100 + this.nivel;
+        this.vidaMaxima = 100 + nivel;
         this.ataque = 3 + this.nivel + this.modificadorArma;
         if (this.vida < this.vidaMaxima){
-            this.vida += 1;
+            this.vida = this.vidaMaxima;
         }
-        if (nivel == 3) {
+        if ((nivel > 2) && (nivel < 7)) {
             this.ninja.asignarNivelJutsus(2);
-        } else if (nivel == 7) {
+        } else if (nivel > 6) {
             this.ninja.asignarNivelJutsus(3);
         }      
     }
@@ -124,8 +121,6 @@ public class Enemigo implements Personaje{
             this.ninja.asignarNivelJutsus(4);
         }
     }        
-   
-    
 ///////////////////////////////////////////////    
     
     public String getNombre(){
