@@ -256,4 +256,5 @@ public class Jugador implements Personaje {
     public int getMisionesCumplidas() {
         return this.misionesCumplidas;
     }
+
 }
