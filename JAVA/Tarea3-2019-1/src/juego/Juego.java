@@ -787,7 +787,7 @@ public class Juego {
                 player.asignarVida(player.getMaxVida());
             }
 
-        } else if (second && !won) {
+        } else if (!won) {
             if (player.getEnergia() - 5 < 1) {
                 System.out.println(
                         "Te has quedado sin vida... pero no debes preocuparte más\n...\n...\nTu viaje llegó a su fin, pero no de la mejor manera...\n...");
@@ -929,6 +929,7 @@ public class Juego {
             }
             break;
         }
+        //player.asignarVida(player.getMaxVida());
         System.out.println("\n\t[END OF MISSION]\n");
         player.asignarEnergia(player.getEnergia() - 5);
     }
