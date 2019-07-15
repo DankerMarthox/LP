@@ -1,5 +1,8 @@
 #lang racket
 
+
+;funcion change
+;cambia los 1 y 0 de una lista por #t o #f o viceversa segun corresponda
 (define (change oldList)
   (let aiura ((ln oldList) (lfinal '()))
     (cond
@@ -13,6 +16,10 @@
        ]
        ) ) )
 
+
+;funciones apply[ XFUCTION ]
+;aplica la funcion XFUNCTION a una lista segun lo especificado en la tarea
+; XFUNCTION ::- [ and or xor ]
 (define (applyAnd list)
   (define changed (change list))
   (let hlp ((final '())(act (car changed)) (todo (cdr changed)))
@@ -52,15 +59,18 @@
      )
     )
 )
+;las 3 funciones anteriores trabajan exactamente igual
 
-(define (oruga list)
+;funcion oruga
+;aplica las funciones A, O, X segun corresponda a la lista lista
+(define (oruga lista)
   (cond
-    [(eq? (car list) 'A)
-     (applyAnd (cadr list)) ]
-    [(eq? (car list) 'O)
-     (applyOr (cadr list))]
-    [(eq? (car list) 'X)
-     (applyXor (cadr list))]
+    [(eq? (car lista) 'A)
+     (applyAnd (cadr lista)) ]
+    [(eq? (car lista) 'O)
+     (applyOr (cadr lista))]
+    [(eq? (car lista) 'X)
+     (applyXor (cadr lista))]
     [else
      (display "lol")
      ]
