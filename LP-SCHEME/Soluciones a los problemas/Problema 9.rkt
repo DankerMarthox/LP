@@ -42,7 +42,6 @@
 ;funcion conga
 ;realiza lo especificado en el enunciado segun corresponda
 ;hace uso de las funciones anteriores
-;y hace la tarea dab
 (define (conga List1 List2)
   (define L1 (order List1)) (define L2 (order List2))
   (display L1)(display "\n") (display L2)(display "\n")

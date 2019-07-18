@@ -1,7 +1,7 @@
 #lang racket
 
 ;funcion factorial
-;calcula fatorial izi pizi
+;calcula el factorial de un numero con recursion de cola
 (define (factorial x)
   (define (fact-iter a product)
 	(if (= a 0)
@@ -15,7 +15,7 @@
 ;va separando la lista en 2 con el car y el cdr. si queda el cdr vacio se aumenta en 1 el contador de permutaciones (+ 1 iteraciones)
 ;si el contador de iteraciones es mayor que la cantidad de permutaciones de la lista, retorna F
 ;esto era un parche xd
-(define (div2 List)
+(define (div List)
   (define Max (factorial (length List)))
   (define sum (apply + List))
   (if (and (even? sum) (not (empty? List)))
@@ -39,33 +39,10 @@
    )
  )
 
-
-;funcion div
-;hace lo mismo que la anterior, pero con un corte limpio, me gusta mas la anterior asi que la dejé
-;dab
-(define (div List)
-  (define sum (apply + List))
-  (if (and (even? sum) (not (empty? List)))
-   (let hlp ((l List) (lret '()))  
-    (cond
-      [(= (apply + l) (/ sum 2))
-       (reverse (append (list l) (list lret)))
-       ]
-      [(empty? l)
-       (display "F\n")
-       ]
-      [else
-       (hlp (cdr l) (append lret (list (car l))))
-       ]
-     )
-    )
-    (display "F\n")
-   )
-  )
-
-(div2 '(4 5 6 7 8))
-(div2 '(1 2 3 4 5 6 7 8))
-(div2 '(1 2 3 4 5 6 7 8 9 10 11))
-(div2 '(5 6 7 8 9 10 11))
-(div2 '(30 31 32 33 34))
-(div2 '(44 45 46 47 48))
+(div '(4 5 6 7 8))
+(div '(1 2 3 4 5 6 7 8))
+(div '(1 2 3 4 5 6 7 8 9 10 11))
+(div '(5 6 7 8 9 10 11))
+(div '(30 31 32 33 34))
+(div '(44 45 46 47 48))
+(div '(45 46 47 48 49 50 51 52 53 54 55))

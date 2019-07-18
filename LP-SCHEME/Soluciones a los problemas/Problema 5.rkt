@@ -5,7 +5,7 @@
 ;simplemente scheme no funciona asi
 ;hace lo que quieres que haga
 ;     *Da-dabs*
-;aplica funcion i o p segun paridad del numero y como se especifica em la tarea
+
 (define ((applyDouble i p) value)
   (if (even? value)
       (+ (i value) (p (p value)))
